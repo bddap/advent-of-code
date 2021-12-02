@@ -1,6 +1,131 @@
 {
-  "year": 2020,
+  "year": 2021,
   "parts": [
+    {
+      "day": 1,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 1,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 2,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 2,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 3,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 3,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 4,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 4,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 5,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 5,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 6,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 6,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 7,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 7,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 8,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 8,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 9,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 9,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 10,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 10,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 11,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 11,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 12,
+      "part": 1,
+      "name": null
+    },
+    {
+      "day": 12,
+      "part": 2,
+      "name": null
+    },
+    {
+      "day": 13,
+      "part": 1,
+      "name": null
+    },
     {
       "day": 13,
       "part": 2,

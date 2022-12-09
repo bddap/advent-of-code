@@ -10,11 +10,11 @@ pub struct Challenge {
     pub year: usize,
     pub day: usize,
     pub part: usize,
-    pub run: fn(&str) -> anyhow::Result<usize>,
+    pub run: fn(&str) -> String,
 }
 
 impl Challenge {
-    pub fn run(&self) -> anyhow::Result<usize> {
+    pub fn run(&self) -> anyhow::Result<String> {
         let input = aoc_years()
             .lock()
             .unwrap()
@@ -23,7 +23,7 @@ impl Challenge {
             .as_ref()
             .map_err(|e| anyhow::anyhow!("{e}"))?
             .read_or_fetch(self.day)?;
-        (self.run)(&input)
+        Ok((self.run)(&input))
     }
 }
 
@@ -42,11 +42,16 @@ macro_rules! challenge {
             static __: crate::Challenge = {
                 let part = $part;
                 assert!(part == 1 || part == 2);
+
+                fn $funcname(a: &str) -> String {
+                    super::$funcname(a).to_string()
+                }
+
                 crate::Challenge {
                     year: $year,
                     day: $day,
                     part,
-                    run: super::$funcname,
+                    run: $funcname,
                 }
             };
         }

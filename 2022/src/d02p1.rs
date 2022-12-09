@@ -1,6 +1,6 @@
 #[macro_rules_attribute::apply(challenge)]
 #[aoc(2022, 2, 1)]
-fn run(inp: &str) -> anyhow::Result<usize> {
+fn run(inp: &str) -> usize {
     let sum = inp
         .lines()
         .map(|line| {
@@ -11,7 +11,7 @@ fn run(inp: &str) -> anyhow::Result<usize> {
             score_round(a, b)
         })
         .sum();
-    Ok(sum)
+    sum
 }
 
 enum Rps {
@@ -52,6 +52,6 @@ mod test {
     #[test]
     fn test() {
         let inp = "A Y\nB X\nC Z";
-        assert_eq!(run(inp).unwrap(), 15);
+        assert_eq!(run(inp), 15);
     }
 }

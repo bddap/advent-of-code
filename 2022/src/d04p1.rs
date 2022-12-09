@@ -2,17 +2,15 @@ use std::ops::RangeInclusive;
 
 #[macro_rules_attribute::apply(challenge)]
 #[aoc(2022, 4, 1)]
-fn run(inp: &str) -> anyhow::Result<usize> {
-    let ret = inp
-        .lines()
+fn run(inp: &str) -> usize {
+    inp.lines()
         .filter(|line| {
             let mut iter = line.split(',');
             let a = parserange(iter.next().unwrap());
             let b = parserange(iter.next().unwrap());
             contains(&a, &b) || contains(&b, &a)
         })
-        .count();
-    Ok(ret)
+        .count()
 }
 
 fn contains(a: &RangeInclusive<usize>, b: &RangeInclusive<usize>) -> bool {
@@ -34,7 +32,7 @@ mod test {
     #[test]
     fn test() {
         assert_eq!(
-            run("2-4,6-8\n2-3,4-5\n5-7,7-9\n2-8,3-7\n6-6,4-6\n2-6,4-8").unwrap(),
+            run("2-4,6-8\n2-3,4-5\n5-7,7-9\n2-8,3-7\n6-6,4-6\n2-6,4-8"),
             2,
         );
     }

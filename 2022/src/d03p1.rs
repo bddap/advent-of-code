@@ -1,8 +1,7 @@
 #[macro_rules_attribute::apply(challenge)]
 #[aoc(2022, 3, 1)]
-fn run(inp: &str) -> anyhow::Result<usize> {
-    let ret = inp
-        .lines()
+fn run(inp: &str) -> usize {
+    inp.lines()
         .map(|line| {
             let h = line.len() / 2;
             let a = &line[..h];
@@ -15,8 +14,7 @@ fn run(inp: &str) -> anyhow::Result<usize> {
             panic!()
         })
         .map(score)
-        .sum();
-    Ok(ret)
+        .sum()
 }
 
 fn score(c: char) -> usize {

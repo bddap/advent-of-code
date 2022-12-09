@@ -1,8 +1,7 @@
 #[macro_rules_attribute::apply(challenge)]
 #[aoc(2022, 3, 2)]
-fn run(inp: &str) -> anyhow::Result<usize> {
-    let ret = inp
-        .lines()
+fn run(inp: &str) -> usize {
+    inp.lines()
         .collect::<Vec<_>>()
         .chunks(3)
         .map(|line_triple| {
@@ -14,8 +13,7 @@ fn run(inp: &str) -> anyhow::Result<usize> {
             panic!()
         })
         .map(score)
-        .sum();
-    Ok(ret)
+        .sum()
 }
 
 fn score(c: char) -> usize {

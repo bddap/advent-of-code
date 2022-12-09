@@ -1,8 +1,7 @@
 #[macro_rules_attribute::apply(challenge)]
 #[aoc(2022, 2, 1)]
-fn run(inp: &str) -> anyhow::Result<usize> {
-    let sum = inp
-        .lines()
+fn run(inp: &str) -> usize {
+    inp.lines()
         .map(|line| {
             let mut c = line.chars();
             let a = Rps::from_char(c.next().unwrap());
@@ -10,8 +9,7 @@ fn run(inp: &str) -> anyhow::Result<usize> {
             let b = Outcome::from_char(c.next().unwrap());
             score_round(a, b)
         })
-        .sum();
-    Ok(sum)
+        .sum()
 }
 
 #[derive(Clone, Copy)]
@@ -92,6 +90,6 @@ mod test {
     #[test]
     fn test() {
         let inp = "A Y\nB X\nC Z";
-        assert_eq!(run(inp).unwrap(), 12);
+        assert_eq!(run(inp), 12);
     }
 }

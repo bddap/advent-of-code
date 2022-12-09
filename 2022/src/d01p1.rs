@@ -1,6 +1,6 @@
 #[macro_rules_attribute::apply(challenge)]
 #[aoc(2022, 1, 1)]
-fn run(inp: &str) -> anyhow::Result<usize> {
+fn run(inp: &str) -> usize {
     inp.split("\n\n")
         .map(|section| {
             section
@@ -10,5 +10,5 @@ fn run(inp: &str) -> anyhow::Result<usize> {
                 .sum::<usize>()
         })
         .max()
-        .ok_or(anyhow::anyhow!("no input numbers"))
+        .unwrap()
 }

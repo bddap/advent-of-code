@@ -14,7 +14,7 @@ fn run(inp: &str) -> usize {
 }
 
 fn overlaps(a: &RangeInclusive<usize>, b: &RangeInclusive<usize>) -> bool {
-    a.contains(b.start()) || a.contains(b.end())
+    a.contains(b.start()) || a.contains(b.end()) || b.contains(a.start()) || b.contains(a.end())
 }
 
 fn parserange(r: &str) -> RangeInclusive<usize> {

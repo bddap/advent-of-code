@@ -8,9 +8,10 @@
 // mod test {
 //     use super::*;
 
+//     const INP: &str = "";
+    
 //     #[test]
 //     fn test() {
-//         let inp = "";
-//         assert_eq!(run(inp), 0);
+//         assert_eq!(run(INP), 0);
 //     }
 // }

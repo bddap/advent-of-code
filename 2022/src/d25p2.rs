@@ -9,7 +9,7 @@
 //     use super::*;
 
 //     const INP: &str = "";
-    
+
 //     #[test]
 //     fn test() {
 //         assert_eq!(run(INP), 0);

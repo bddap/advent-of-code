@@ -8,42 +8,59 @@ use aoc_parse::{
 #[macro_rules_attribute::apply(challenge)]
 #[aoc(2022, 15, 1)]
 fn run(inp: &str) -> usize {
-    let target_row = 10;
+    solve(inp, 2000000)
+}
+
+fn solve(inp: &str, target_row: isize) -> usize {
     let inp = parse(inp);
 
     let mut negatives = Vec::<Range<isize>>::new();
-    for (sensor, beacon) in inp {
-        let mradius = sensor.sub(beacon).manhattan();
-        let dtorow = (sensor.y - target_row).abs();
-        let coverage = mradius.checked_sub(dtorow).unwrap_or(0);
-        if coverage == 0 {
+    for (sensor, beacon) in &inp {
+        let mradius = sensor.sub(*beacon).manhattan();
+        let distance_to_row = (sensor.y - target_row).abs();
+
+        if distance_to_row > mradius {
             continue;
         }
+        assert!(distance_to_row <= mradius);
+
+        let coverage = mradius + 1 - distance_to_row;
+
         negatives.push((sensor.x - coverage)..(sensor.x + coverage + 1));
     }
-    // todo need to not mark beacons as negative
     negatives.sort_by_key(|r| r.start);
 
-    negatives.into_iter().reduce(range_combine).unwrap().len()
+    let negatives = negatives.into_iter().fold(Vec::new(), push_range);
+
+    let mut total: usize = negatives.iter().map(|r| r.len()).sum();
+    for (_, beacon) in inp {
+        if beacon.y == target_row {
+            for r in &negatives {
+                if r.contains(&beacon.x) {
+                    total -= 1;
+                }
+            }
+        }
+    }
+
+    total
 }
 
-fn range_combine(a: Range<isize>, b: Range<isize>) -> Range<isize> {
-    assert!(a.start <= b.start);
-    let overlap = overlap(&a, &b);
-    let end = a.end.max(b.end);
-    let len = a.len() as isize + b.len() as isize - overlap;
-    (end - len)..end
-}
+/// ensures ranges do not overlap
+fn push_range(mut rgs: Vec<Range<isize>>, b: Range<isize>) -> Vec<Range<isize>> {
+    let Some(last) = rgs.last_mut() else {
+        rgs.push(b);
+        return rgs;
+    };
 
-fn overlap(a: &Range<isize>, b: &Range<isize>) -> isize {
-    assert!(a.start <= b.start);
-    if a.contains(&b.end) {
-        return b.len() as isize;
+    assert!(last.start <= b.start);
+    if last.end < b.start {
+        rgs.push(b);
+        return rgs;
     }
-    if a.contains(&b.start) {
-        return a.end - b.start;
-    }
-    0
+
+    last.end = last.end.max(b.end);
+    rgs
 }
 
 fn parse(inp: &str) -> Vec<(Point, Point)> {
@@ -102,16 +119,18 @@ Sensor at x=20, y=1: closest beacon is at x=15, y=3";
 
     #[test]
     fn test() {
-        assert_eq!(run(INP), 26);
+        assert_eq!(solve(INP, 10), 26);
     }
 
     #[test]
     fn rac() {
-        assert_eq!(range_combine(0..2, 2..4), 0..4);
-        assert_eq!(overlap(&(0..3), &(2..4)), 1);
-        assert_eq!(range_combine(0..3, 2..4), 0..4);
-        assert_eq!(range_combine(0..3, 0..4), 0..4);
-        assert_eq!(range_combine(0..5, 0..4), 0..5);
-        assert_eq!(range_combine(0..1, 2..4), 1..4);
+        assert_eq!(push_range(Vec::new(), 2..4), vec![2..4]);
+        assert_eq!(push_range(vec![2..4], 2..4), vec![2..4]);
+        assert_eq!(push_range(vec![1..4], 2..4), vec![1..4]);
+        assert_eq!(push_range(vec![1..2], 2..4), vec![1..4]);
+        assert_eq!(push_range(vec![1..2], 3..4), vec![1..2, 3..4]);
+        assert_eq!(push_range(vec![1..2], 1..2), vec![1..2]);
+        assert_eq!(push_range(vec![1..2], 1..3), vec![1..3]);
+        assert_eq!(push_range(vec![1..3], 1..2), vec![1..3]);
     }
 }

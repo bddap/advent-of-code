@@ -6,5 +6,5 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-bddap-aoc = "0.1.1"
+bddap-aoc = { version = "0.1.1", path = "../../bddap-aoc/bddap-aoc" }
 linkme = "0.3.17"

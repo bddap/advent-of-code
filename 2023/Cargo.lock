@@ -124,8 +124,6 @@ checksum = "35636a1494ede3b646cc98f74f8e62c773a38a659ebc777a2cf26b9b74171df9"
 [[package]]
 name = "bddap-aoc"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "358d0429de6f929c44f54d03e121d4e247b350924afcb9adc4aef3ef188155a4"
 dependencies = [
  "anyhow",
  "bddap-aoc-macros",
@@ -143,8 +141,6 @@ dependencies = [
 [[package]]
 name = "bddap-aoc-macros"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "dd5ca907449100d44164b49c9230ae77510b715ca480df23df3f622ae96ed22a"
 dependencies = [
  "proc-macro2",
  "quote",
